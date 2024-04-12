@@ -34,6 +34,36 @@ class Detail extends StatelessWidget {
                   style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 24,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 24,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 24,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 24,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 24,
+                ),
+                ],),
+                SizedBox(height: 10),
                 Center(
                   child: Container(
                     width: 500,
