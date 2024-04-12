@@ -14,11 +14,29 @@ class Home extends StatelessWidget {
           style: TextStyle(
             fontSize: 25, 
             fontWeight: FontWeight.bold,
+            color: Colors.white,
             ),
           ),
+          backgroundColor: Colors.blue,
         centerTitle: true,
       ),
-      body: ListView(
+      body: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        'Now Showing...',
+        style: TextStyle(
+          fontSize: 40,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+      
+      Expanded(
+        child: 
+        ListView(
         scrollDirection: Axis.horizontal,
         children:[Padding(
           padding: EdgeInsets.all(50),
@@ -71,27 +89,9 @@ class Home extends StatelessWidget {
           ),
         ],
       )
+      )
+  ]
+    )
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
