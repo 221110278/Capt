@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import 'package:tugas/data/listFilm.dart';
+import 'package:proyek/data/listFilm.dart';
 
 class Detail extends StatelessWidget {
   Detail({Key? key, required this.nama});

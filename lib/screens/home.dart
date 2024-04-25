@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
-import 'package:tugas/data/listFilm.dart';
-import 'package:tugas/screens/detail.dart';
+import 'package:proyek/data/listFilm.dart';
+import 'package:proyek/screens/detail.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -91,7 +92,21 @@ class Home extends StatelessWidget {
       )
       )
   ]
-    )
+    ),
+  bottomNavigationBar: BottomAppBar(child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: <Widget>[
+      IconButton(
+        icon: Icon(Icons.home),
+        onPressed: (){},),
+      IconButton(
+        onPressed: (){}, 
+        icon: Icon(Icons.history),),
+      IconButton(
+        onPressed: (){}, 
+        icon: Icon(Icons.person ),)
+    ],
+  ),),
     );
   }
 }
