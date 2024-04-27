@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:proyek/data/listFilm.dart';
-import 'package:proyek/screens/detail.dart';
+import 'package:tugas/data/listFilm.dart';
+import 'package:tugas/screens/detail.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final String username;
+  Home({Key? key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +21,57 @@ class Home extends StatelessWidget {
           backgroundColor: Colors.blue,
         centerTitle: true,
       ),
-      body: Column(
+     body: Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
     Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(
-        'Now Showing...',
-        style: TextStyle(
-          fontSize: 40,
-          fontWeight: FontWeight.bold,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '',
+            style: TextStyle(
+              fontSize: 40,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.person,
+                  color: Colors.black87,
+                ),
+                SizedBox(width: 6),
+                Text(
+                  '$username',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
+      
     ),
+    Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Text(
+        "Now Showing...",
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold
+        )
+      ),
+      ),
       
       Expanded(
         child: 
@@ -93,20 +131,21 @@ class Home extends StatelessWidget {
       )
   ]
     ),
-  bottomNavigationBar: BottomAppBar(child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: <Widget>[
-      IconButton(
-        icon: Icon(Icons.home),
-        onPressed: (){},),
-      IconButton(
-        onPressed: (){}, 
-        icon: Icon(Icons.history),),
-      IconButton(
-        onPressed: (){}, 
-        icon: Icon(Icons.person ),)
-    ],
-  ),),
+    bottomNavigationBar: BottomAppBar(child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget> [
+        IconButton(
+           icon: Icon(Icons.home),
+           onPressed: () {},),
+        IconButton(
+           onPressed: () {},
+           icon: Icon(Icons.history),),
+        IconButton(
+           onPressed: () {},
+           icon: Icon(Icons.person),),
+      ]
+      ,
+    )),
     );
   }
 }
