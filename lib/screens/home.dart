@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugas/components/listTiket.dart';
 import 'package:tugas/data/listFilm.dart';
 import 'package:tugas/screens/detail.dart';
 
@@ -137,9 +138,17 @@ class Home extends StatelessWidget {
         IconButton(
            icon: Icon(Icons.home),
            onPressed: () {},),
-        IconButton(
-           onPressed: () {},
-           icon: Icon(Icons.shopping_cart),),
+         IconButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => listTiket(), 
+            ),
+          );
+        },
+        icon: Icon(Icons.shopping_cart),
+      ),
         IconButton(
            onPressed: () {},
            icon: Icon(Icons.person),),
