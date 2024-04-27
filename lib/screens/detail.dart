@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:proyek/data/listFilm.dart';
+import 'package:tugas/components/pesan-tiket.dart';
+import 'package:tugas/data/listFilm.dart';
 
 class Detail extends StatelessWidget {
   Detail({Key? key, required this.nama});
@@ -9,7 +9,7 @@ class Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> selectedFilm = listFilm.firstWhere((film) => film['nama'] == nama);
+  Map<String, dynamic> selectedFilm = listFilm.firstWhere((film) => film['nama'] == nama);    
 
     return Scaffold(
       appBar: AppBar(
@@ -28,11 +28,6 @@ class Detail extends StatelessWidget {
                 Text(
                   '${selectedFilm['nama']}',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  '${selectedFilm['genre']}',
-                  style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -73,6 +68,16 @@ class Detail extends StatelessWidget {
                       style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,
                     ),
                   ),
+                ),
+               SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                      return Tiket(nama: nama);
+                  }));
+                  },
+                  child: Text('Pesan Tiket'),
                 ),
               ],
             ),
