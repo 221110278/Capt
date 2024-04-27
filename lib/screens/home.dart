@@ -139,7 +139,7 @@ class Home extends StatelessWidget {
            onPressed: () {},),
         IconButton(
            onPressed: () {},
-           icon: Icon(Icons.history),),
+           icon: Icon(Icons.shopping_cart),),
         IconButton(
            onPressed: () {},
            icon: Icon(Icons.person),),
