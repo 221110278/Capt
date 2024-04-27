@@ -6,6 +6,8 @@ import 'package:tugas/screens/detail.dart';
 class Home extends StatelessWidget {
   final String username;
   Home({Key? key, required this.username});
+  
+  get jumlahTiket => 0;
 
   @override
   Widget build(BuildContext context) {
@@ -132,29 +134,36 @@ class Home extends StatelessWidget {
       )
   ]
     ),
-    bottomNavigationBar: BottomAppBar(child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget> [
-        IconButton(
-           icon: Icon(Icons.home),
-           onPressed: () {},),
-         IconButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => listTiket(), 
-            ),
-          );
-        },
-        icon: Icon(Icons.shopping_cart),
+    bottomNavigationBar: BottomAppBar(
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: <Widget>[
+      IconButton(
+        icon: Icon(Icons.home),
+        onPressed: () {},
       ),
-        IconButton(
-           onPressed: () {},
-           icon: Icon(Icons.person),),
-      ]
-      ,
-    )),
+      IconButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ListTiket(jumlahTiket: jumlahTiket),
+      ),
+    );
+  },
+  icon: Icon(Icons.shopping_cart),
+),
+
+      IconButton(
+        onPressed: () {},
+        icon: Icon(Icons.person),
+      ),
+    ],
+  ),
+),
+
     );
   }
 }
+
+                 
