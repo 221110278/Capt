@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:proyek/data/listFilm.dart';
-import 'package:proyek/screens/detail.dart';
-import 'package:proyek/components/bookedTiket.dart';
-
+import 'package:tugas/components/allFilm.dart';
+import 'package:tugas/components/bookedTiket.dart';
+import 'package:tugas/data/listFilm.dart';
+import 'package:tugas/screens/detail.dart';
 
 class Home extends StatelessWidget {
   final String username;
@@ -69,12 +69,46 @@ class Home extends StatelessWidget {
     ),
     Padding(
       padding: const EdgeInsets.only(left: 8.0),
-      child: Text(
-        "Now Showing...",
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold
-        )
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "Now Showing...",
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold
+            )
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AllFilm()),
+            );
+            },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+            child: Row(
+              children: [
+                Text(
+                  "Lihat Semua",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey
+                  ),
+                ),
+                Icon(Icons.arrow_right),
+              ],
+            ),
+          ),
+
+        ],
       ),
       ),
       
@@ -155,6 +189,7 @@ class Home extends StatelessWidget {
         },
         icon: Icon(Icons.shopping_cart),
       ),
+
       IconButton(
         onPressed: () {},
         icon: Icon(Icons.person),
@@ -162,7 +197,6 @@ class Home extends StatelessWidget {
     ],
   ),
 ),
-
 
     );
   }
