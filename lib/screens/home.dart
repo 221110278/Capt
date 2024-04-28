@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tugas/components/listTiket.dart';
-import 'package:tugas/data/listFilm.dart';
-import 'package:tugas/screens/detail.dart';
+import 'package:proyek/data/listFilm.dart';
+import 'package:proyek/screens/detail.dart';
+import 'package:proyek/components/bookedTiket.dart';
+
 
 class Home extends StatelessWidget {
   final String username;
-  Home({Key? key, required this.username});
+  final List<int> selectedSeats;
+  Home({Key? key, required this.username, required this.selectedSeats});
   
   get jumlahTiket => 0;
 
@@ -143,17 +145,16 @@ class Home extends StatelessWidget {
         onPressed: () {},
       ),
       IconButton(
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ListTiket(jumlahTiket: jumlahTiket),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+      builder: (context) => BookedSeatsScreen(bookedSeats: selectedSeats),
+    ),
+          );
+        },
+        icon: Icon(Icons.shopping_cart),
       ),
-    );
-  },
-  icon: Icon(Icons.shopping_cart),
-),
-
       IconButton(
         onPressed: () {},
         icon: Icon(Icons.person),
@@ -161,6 +162,7 @@ class Home extends StatelessWidget {
     ],
   ),
 ),
+
 
     );
   }
