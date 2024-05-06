@@ -14,6 +14,20 @@ class Detail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedFilm['nama']),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+
+            },
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {
+                
+              },
+            )
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
