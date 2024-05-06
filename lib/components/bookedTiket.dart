@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:proyek/components/listUsers.dart';
-import 'package:proyek/screens/home.dart';
+import 'package:tugas/components/listUsers.dart';
+import 'package:tugas/screens/home.dart';
 
 class BookedSeatsScreen extends StatelessWidget {
   final List<int> bookedSeats;
@@ -12,6 +12,20 @@ Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
       title: Text('Booked Seats'),
+      actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+
+            },
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {
+                
+              },
+            )
+        ],
     ),
     body: Center(
       child: Column(
