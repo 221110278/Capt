@@ -31,6 +31,20 @@ class _TiketState extends State<Tiket> {
           ),
           backgroundColor: Colors.blue,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+
+            },
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {
+                
+              },
+            )
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
