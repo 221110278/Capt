@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:tugas/components/allFilm.dart';
 import 'package:tugas/components/bookedTiket.dart';
@@ -25,6 +26,20 @@ class Home extends StatelessWidget {
           ),
           backgroundColor: Colors.blue,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+
+            },
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {
+                
+              },
+            )
+        ],
       ),
      body: Column(
   crossAxisAlignment: CrossAxisAlignment.start,
