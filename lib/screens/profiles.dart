@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:proyek/components/bottom_nav_bar.dart';
+import 'package:tugas/components/bottom_nav_bar.dart';
+import 'package:tugas/components/favorite.dart';
+import 'package:tugas/components/setting.dart';
 
 class ProfilePage extends StatelessWidget {
   final String username;
-
   ProfilePage({Key? key, required this.username});
 
   @override
@@ -12,19 +13,67 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Profile'),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Username: $username',
-              style: TextStyle(fontSize: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: ElevatedButton(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Icon(Icons.favorite),
+                    ),
+                    Text('Favorite')
+                  ],),
+                  onPressed: () {
+                    Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context){
+                      return Favorite(favoriteMovies: [],);
+                    }));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0                    
+                  ), 
+                )
             ),
-            // Add more profile information/widgets as needed
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Divider(
+                color: Colors.grey,
+                thickness: 1,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: ElevatedButton(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Icon(Icons.settings),
+                    ),
+                    Text('Settings')
+                  ],),
+                onPressed: () {
+                  Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context){
+                      return Settings();
+                    }));
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0                    
+                ), 
+              )
+            ),
           ],
         ),
-      ),
-      bottomNavigationBar: MyBottomNavigationBar(
+        ),
+        bottomNavigationBar: MyBottomNavigationBar(
         currentIndex: 1, // Set the current index to indicate profile page
         onTap: (index) {
           // Handle navigation based on index
