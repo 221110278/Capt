@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:proyek/components/listUsers.dart';
-import 'package:proyek/screens/home.dart';
+import 'package:tugas/components/listUsers.dart';
+import 'package:tugas/screens/home.dart';
 
 class ListTiket extends StatefulWidget {
   final int jumlahTiket;
@@ -33,6 +33,20 @@ class _ListTiketState extends State<ListTiket> {
         title: const Text('List Tiket'),
         backgroundColor: Colors.blue,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+
+            },
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {
+                
+              },
+            )
+        ],
       ),
       body: Column(
         children: [
@@ -117,3 +131,5 @@ class _ListTiketState extends State<ListTiket> {
     selectedSeats = List<int>.generate(isSelected.length, (i) => i).where((i) => isSelected[i]).toList();
   }
 }
+
+
