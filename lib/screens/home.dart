@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:tugas/components/allFilm.dart';
+import 'package:tugas/components/bookedTiket.dart';
 import 'package:tugas/components/bottom_nav_bar.dart';
+import 'package:tugas/components/favorite.dart';
 import 'package:tugas/data/listFilm.dart';
 import 'package:tugas/screens/detail.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   final String username;
   final List<int> selectedSeats;
   Home({Key? key, required this.username, required this.selectedSeats});
-  
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   get jumlahTiket => 0;
 
   @override
@@ -29,15 +36,52 @@ class Home extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-
+              
             },
             ),
-            IconButton(
-              icon: Icon(Icons.more_vert),
-              onPressed: () {
-                
-              },
-            )
+          
+  PopupMenuButton(
+  icon: Icon(Icons.more_vert),
+  itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+    PopupMenuItem(
+      child: ListTile(
+        leading: Icon(Icons.home),
+        title: Text('Home'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home(username: widget.username, selectedSeats: widget.selectedSeats,)),
+          );
+        },
+      ),
+    ),
+    PopupMenuItem(
+      child: ListTile(
+        leading: Icon(Icons.shopping_cart),
+        title: Text('Tickets'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BookedSeatsScreen(bookedSeats: widget.selectedSeats)),
+          );
+        },
+      ),
+    ),
+    PopupMenuItem(
+      child: ListTile(
+        leading: Icon(Icons.favorite),
+        title: Text('Favorite'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Favorite(favoriteMovies: [],)),
+          );
+        },
+      ),
+    ),
+  ],
+)
+
         ],
       ),
      body: Column(
@@ -68,7 +112,7 @@ class Home extends StatelessWidget {
                 ),
                 SizedBox(width: 6),
                 Text(
-                  '$username',
+                  '${widget.username}',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black87,
@@ -185,12 +229,12 @@ class Home extends StatelessWidget {
   ]
     ),
     bottomNavigationBar: MyBottomNavigationBar(
-        currentIndex: 0, // Set the current index
+        currentIndex: 0, 
         onTap: (index) {
-          // Handle navigation based on index
+          
         },
-        bookedSeats: selectedSeats,
-        username : "${username}", // Pass the list of selected seats
+        bookedSeats: widget.selectedSeats,
+        username : "${widget.username}", 
       ),
 
     );
