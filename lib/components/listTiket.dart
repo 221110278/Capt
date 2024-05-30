@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tugas/components/bookedTiket.dart';
+import 'package:tugas/components/favorite.dart';
 import 'package:tugas/components/listUsers.dart';
 import 'package:tugas/screens/home.dart';
 
@@ -40,12 +42,56 @@ class _ListTiketState extends State<ListTiket> {
 
             },
             ),
-            IconButton(
-              icon: Icon(Icons.more_vert),
-              onPressed: () {
-                
-              },
-            )
+            PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
+                  onTap: () {
+                    Navigator.pop(context); 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(username: 'username', selectedSeats: []), // Replace with actual data
+                      ),
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.shopping_cart),
+                  title: Text('Tickets'),
+                  onTap: () {
+                    Navigator.pop(context); 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookedSeatsScreen(bookedSeats: []), // Replace with actual data
+                      ),
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text('Favorite'),
+                  onTap: () {
+                    Navigator.pop(context); 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Favorite(favoriteMovies: []), 
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       body: Column(
