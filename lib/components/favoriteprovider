@@ -1,0 +1,17 @@
+import 'package:flutter/material.dart';
+
+class FavoriteProvider with ChangeNotifier {
+  List<String> _favoriteMovies = [];
+
+  List<String> get favoriteMovies => _favoriteMovies;
+
+  void addFavorite(String movie) {
+    _favoriteMovies.add(movie);
+    notifyListeners();
+  }
+
+  void removeFavorite(String movie) {
+    _favoriteMovies.remove(movie);
+    notifyListeners();
+  }
+}
