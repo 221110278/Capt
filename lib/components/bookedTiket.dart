@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugas/components/bottom_nav_bar.dart';
+import 'package:tugas/components/favorite.dart';
+import 'package:tugas/screens/home.dart';
 
 
 class BookedSeatsScreen extends StatelessWidget {
@@ -9,7 +11,6 @@ class BookedSeatsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Adjust the selected seats by adding 1 to each selected seat
     List<int> adjustedBookedSeats = bookedSeats.map((seat) => seat + 1).toList();
 
     return Scaffold(
@@ -20,9 +21,55 @@ class BookedSeatsScreen extends StatelessWidget {
             icon: Icon(Icons.search),
             onPressed: () {},
           ),
-          IconButton(
+          PopupMenuButton(
             icon: Icon(Icons.more_vert),
-            onPressed: () {},
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
+                  onTap: () {
+                    Navigator.pop(context); 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(username: 'username', selectedSeats: []), // Replace with actual data
+                      ),
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.shopping_cart),
+                  title: Text('Tickets'),
+                  onTap: () {
+                    Navigator.pop(context); 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookedSeatsScreen(bookedSeats: []), // Replace with actual data
+                      ),
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text('Favorite'),
+                  onTap: () {
+                    Navigator.pop(context); 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Favorite(favoriteMovies: []), 
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -46,10 +93,10 @@ class BookedSeatsScreen extends StatelessWidget {
       bottomNavigationBar: MyBottomNavigationBar(
         currentIndex: 0,
         onTap: (index) {
-          // Handle navigation based on index
+          
         },
-        bookedSeats: adjustedBookedSeats, // Pass the adjusted selected seats
-        username: "", // Provide a value for the username parameter
+        bookedSeats: adjustedBookedSeats, 
+        username: "", 
       ),
     );
   }
