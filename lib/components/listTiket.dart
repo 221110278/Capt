@@ -3,6 +3,7 @@ import 'package:tugas/components/bookedTiket.dart';
 import 'package:tugas/components/favorite.dart';
 import 'package:tugas/components/listUsers.dart';
 import 'package:tugas/screens/home.dart';
+import 'dart:math';
 
 class ListTiket extends StatefulWidget {
   final int jumlahTiket;
@@ -18,6 +19,10 @@ class _ListTiketState extends State<ListTiket> {
   late int maxSelection;
   late double cmToPixel;
   late List<int> selectedSeats = [];
+  int _generateID() {
+    Random random = new Random();
+    return random.nextInt(999999); 
+  }
 
   @override
   void initState() {
@@ -139,7 +144,31 @@ class _ListTiketState extends State<ListTiket> {
             ),
           ),
           ElevatedButton(
-            onPressed: _orderSeats,
+            onPressed: (){
+              showDialog(
+                context: context, 
+                builder: (BuildContext context){
+                  return AlertDialog(
+                    content: Text("Apakah Anda yakin ingin menyelesaikan pemesanan tiket?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); 
+                        },
+                        child: Text("Tidak"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); 
+                          _orderSeats();
+                        }, 
+                        child: Text("Ya"),
+                      ),
+                    ],
+                  );
+                }
+                );
+            },
             child: const Text('Pesan'),
           ),
           ElevatedButton(
@@ -175,7 +204,51 @@ class _ListTiketState extends State<ListTiket> {
 
   void _orderSeats() {
     selectedSeats = List<int>.generate(isSelected.length, (i) => i).where((i) => isSelected[i]).toList();
+    int pembeliID = _generateID();
+    showDialog(
+      context: context, 
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Konfirmasi Pembayaran"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("ID: $pembeliID"),
+              TextField(
+                decoration: InputDecoration(labelText: 'Nama Anda'),
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Nomor Telepon'),
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Nomor Kartu Pembayaran'),
+              ),
+            ],
+            ),
+            actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Home(
+                    username: listUsers.isNotEmpty ? listUsers.first["username"] : "username",
+                    selectedSeats: selectedSeats, 
+                  ),
+                ),
+              );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                  content: Text('Pesanan tiket berhasil!'),
+                  backgroundColor: Colors.green,
+                )
+                );
+              },
+              child: Text("Bayar"),
+            ),
+          ],
+        );
+      }
+      );
   }
 }
-
-
