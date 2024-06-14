@@ -41,12 +41,13 @@ class _ListTiketState extends State<ListTiket> {
         backgroundColor: Colors.blue,
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-
-            },
-            ),
+          Tooltip(
+               message: 'Search',
+               child: IconButton(
+                 icon: Icon(Icons.search),
+                 onPressed: () {},
+               ),
+             ),
             PopupMenuButton(
             icon: Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
