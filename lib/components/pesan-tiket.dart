@@ -35,12 +35,13 @@ class _TiketState extends State<Tiket> {
           backgroundColor: Colors.blue,
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-
-            },
-            ),
+          Tooltip(
+               message: 'Search',
+               child: IconButton(
+                 icon: Icon(Icons.search),
+                 onPressed: () {},
+               ),
+             ),
              PopupMenuButton(
             icon: Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -53,7 +54,7 @@ class _TiketState extends State<Tiket> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(username: 'username', selectedSeats: []), // Replace with actual data
+                        builder: (context) => Home(username: 'username', selectedSeats: []),
                       ),
                     );
                   },
@@ -68,7 +69,7 @@ class _TiketState extends State<Tiket> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BookedSeatsScreen(bookedSeats: []), // Replace with actual data
+                        builder: (context) => BookedSeatsScreen(bookedSeats: []), 
                       ),
                     );
                   },
@@ -122,13 +123,16 @@ class _TiketState extends State<Tiket> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          if (jumlahTiket > 0) jumlahTiket--;
-                        });
-                      },
-                      icon: Icon(Icons.remove),
+                    Tooltip(
+                      message: 'Kurangi Tiket',
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (jumlahTiket > 0) jumlahTiket--;
+                          });
+                        },
+                        icon: Icon(Icons.remove),
+                      ),
                     ),
                     Text(
                       '$jumlahTiket',
@@ -137,18 +141,21 @@ class _TiketState extends State<Tiket> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          jumlahTiket++;
-                        
-                          selectedFilm['jumlahTiket'] = jumlahTiket;
-                        });
-                      },
-                      icon: Icon(Icons.add),
+                    Tooltip(
+                      message: 'Tambah Tiket',
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            jumlahTiket++;
+                            selectedFilm['jumlahTiket'] = jumlahTiket;
+                          });
+                        },
+                        icon: Icon(Icons.add),
+                      ),
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
