@@ -17,6 +17,8 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
+  double _rating = 0; 
+
   @override
   Widget build(BuildContext context) {
     final favoriteProvider = Provider.of<FavoriteProvider>(context);
@@ -28,10 +30,13 @@ class _DetailState extends State<Detail> {
       appBar: AppBar(
         title: Text(selectedFilm['nama']),
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
+          Tooltip(
+               message: 'Search',
+               child: IconButton(
+                 icon: Icon(Icons.search),
+                 onPressed: () {},
+               ),
+             ),
           PopupMenuButton(
             icon: Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -44,7 +49,7 @@ class _DetailState extends State<Detail> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(username: 'username', selectedSeats: []), // Replace with actual data
+                        builder: (context) => Home(username: 'username', selectedSeats: []),
                       ),
                     );
                   },
@@ -59,7 +64,7 @@ class _DetailState extends State<Detail> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BookedSeatsScreen(bookedSeats: []), // Replace with actual data
+                        builder: (context) => BookedSeatsScreen(bookedSeats: []), 
                       ),
                     );
                   },
@@ -97,35 +102,30 @@ class _DetailState extends State<Detail> {
                   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
+                  children: List.generate(5, (index) {
+                    return Icon(
+                      index < _rating ? Icons.star : Icons.star_border,
                       color: Colors.yellow,
                       size: 24,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 24,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 24,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 24,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 24,
-                    ),
-                  ],
+                    );
+                  }),
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: 200, 
+                  child: Slider(
+                    value: _rating,
+                    min: 0,
+                    max: 5,
+                    divisions: 5,
+                    onChanged: (value) {
+                      setState(() {
+                        _rating = value;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Center(
