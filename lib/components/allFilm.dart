@@ -36,12 +36,13 @@ class _AllFilmState extends State<AllFilm> {
           ),
         backgroundColor: Colors.white,
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-
-            },
-            ),
+          Tooltip(
+               message: 'Search',
+               child: IconButton(
+                 icon: Icon(Icons.search),
+                 onPressed: () {},
+               ),
+             ),
             PopupMenuButton(
             icon: Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -54,7 +55,7 @@ class _AllFilmState extends State<AllFilm> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(username: 'username', selectedSeats: []), // Replace with actual data
+                        builder: (context) => Home(username: 'username', selectedSeats: []), 
                       ),
                     );
                   },
@@ -69,7 +70,7 @@ class _AllFilmState extends State<AllFilm> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BookedSeatsScreen(bookedSeats: []), // Replace with actual data
+                        builder: (context) => BookedSeatsScreen(bookedSeats: []), 
                       ),
                     );
                   },
