@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Number of tabs
+      length: 2, 
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -35,17 +35,23 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.blue,
           centerTitle: true,
           actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            ),
-            PopupMenuButton(
-              icon: Icon(Icons.more_vert),
-              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                PopupMenuItem(
-                  child: ListTile(
-                    leading: Icon(Icons.home),
-                    title: Text('Home'),
+             Tooltip(
+               message: 'Search',
+               child: IconButton(
+                 icon: Icon(Icons.search),
+                 onPressed: () {},
+               ),
+             ),
+             PopupMenuButton(
+               icon: Icon(Icons.more_vert),
+               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                 PopupMenuItem(
+                   child: ListTile(
+                     leading: Tooltip(
+                       message: 'Home',
+                       child: Icon(Icons.home),
+                     ),
+                     title: Text('Home'),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -288,7 +294,6 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            // Coming Soon tab
             Center(
               child: Text(
                 "Coming Soon",
