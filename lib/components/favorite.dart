@@ -16,7 +16,7 @@ class Favorite extends StatelessWidget {
         title: const Text("Favorite Movies"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(0),
+        padding: const EdgeInsets.all(8.0), // Add padding around the ListView
         child: ListView.builder(
           itemCount: favoriteProvider.favoriteMovies.length,
           itemBuilder: (context, index) {
@@ -25,46 +25,38 @@ class Favorite extends StatelessWidget {
               (film) => film['nama'] == favoriteMovieName,
             );
 
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
-                    children: [
-                      Image.network(
-                        favoriteMovie['gambar'],
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              favoriteMovie['nama'],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(favoriteMovie['genre']),
-                          ],
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          favoriteProvider.removeFavorite(favoriteMovieName);
-                        },
-                      ),
-                    ],
+            return Card(
+              margin: const EdgeInsets.symmetric(vertical: 8.0), // Add margin between cards
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(8.0), // Padding inside the ListTile
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    favoriteMovie['gambar'],
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                const Divider(),
-              ],
+                title: Text(
+                  favoriteMovie['nama'],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(favoriteMovie['genre']),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    favoriteProvider.removeFavorite(favoriteMovieName);
+                  },
+                ),
+              ),
             );
           },
         ),
