@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, 
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -35,29 +35,31 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.blue,
           centerTitle: true,
           actions: [
-             Tooltip(
-               message: 'Search',
-               child: IconButton(
-                 icon: Icon(Icons.search),
-                 onPressed: () {},
-               ),
-             ),
-             PopupMenuButton(
-               icon: Icon(Icons.more_vert),
-               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                 PopupMenuItem(
-                   child: ListTile(
-                     leading: Tooltip(
-                       message: 'Home',
-                       child: Icon(Icons.home),
-                     ),
-                     title: Text('Home'),
+            Tooltip(
+              message: 'Search',
+              child: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {},
+              ),
+            ),
+            PopupMenuButton(
+              icon: Icon(Icons.more_vert),
+              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                PopupMenuItem(
+                  child: ListTile(
+                    leading: Tooltip(
+                      message: 'Home',
+                      child: Icon(Icons.home),
+                    ),
+                    title: Text('Home'),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              Home(username: widget.username, selectedSeats: widget.selectedSeats),
+                          builder: (context) => Home(
+                            username: widget.username,
+                            selectedSeats: widget.selectedSeats,
+                          ),
                         ),
                       );
                     },
@@ -71,7 +73,9 @@ class _HomeState extends State<Home> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BookedSeatsScreen(bookedSeats: widget.selectedSeats),
+                          builder: (context) => BookedSeatsScreen(
+                            bookedSeats: widget.selectedSeats,
+                          ),
                         ),
                       );
                     },
@@ -95,6 +99,10 @@ class _HomeState extends State<Home> {
             )
           ],
           bottom: TabBar(
+            labelStyle: TextStyle(
+              color: Colors.white,
+              fontSize:15
+            ),
             tabs: [
               Tab(text: "Now Showing"),
               Tab(text: "Coming Soon"),
@@ -136,8 +144,10 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          Home(username: widget.username, selectedSeats: widget.selectedSeats),
+                      builder: (context) => Home(
+                        username: widget.username,
+                        selectedSeats: widget.selectedSeats,
+                      ),
                     ),
                   );
                 },
@@ -150,7 +160,9 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BookedSeatsScreen(bookedSeats: widget.selectedSeats),
+                      builder: (context) => BookedSeatsScreen(
+                        bookedSeats: widget.selectedSeats,
+                      ),
                     ),
                   );
                 },
@@ -174,125 +186,117 @@ class _HomeState extends State<Home> {
         body: TabBarView(
           children: [
             // Now Showing tab
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '',
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.black12,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      
-                      SizedBox(
-                        width: 30,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AllFilm()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Lihat Semua",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold, color: Colors.grey),
-                            ),
-                            Icon(Icons.arrow_right),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(50),
-                        child: Row(
-                          children: [
-                            ...listFilm.map((e) {
-                              return Padding(
-                                padding: const EdgeInsets.all(25),
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Image.network(
-                                        fit: BoxFit.cover,
-                                        '${e['gambar']}',
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: SizedBox(
-                                        width: 220,
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(builder: (context) {
-                                              return Detail(
-                                                nama: '${e["nama"]}',
-                                              );
-                                            }));
-                                          },
-                                          child: Text(
-                                            '${e['nama']}',
-                                            style: TextStyle(
-                                                fontSize: 15, fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text('${e['genre']}'),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                  ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => AllFilm()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                "See All",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
                                 ),
-                              );
-                            })
-                          ],
+                              ),
+                              Icon(Icons.arrow_right, color: Colors.blue),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: listFilm.length,
+                      itemBuilder: (context, index) {
+                        final film = listFilm[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(15),
+                                    ),
+                                    child: Image.network(
+                                      film['gambar'],
+                                      fit: BoxFit.cover,
+                                      width: 200,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        film['nama'],
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        film['genre'],
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => Detail(
+                                          nama: film['nama'],
+                                        ),
+                                      ));
+                                    },
+                                    child: Text(
+                                      'View Details',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             Center(
               child: Text(
