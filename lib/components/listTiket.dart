@@ -7,8 +7,11 @@ import 'dart:math';
 
 class ListTiket extends StatefulWidget {
   final int jumlahTiket;
+  final DateTime selectedDate;
+  final TimeOfDay selectedTime;
 
-  const ListTiket({Key? key, required this.jumlahTiket}) : super(key: key);
+  const ListTiket({Key? key, required this.jumlahTiket,required this.selectedDate,
+    required this.selectedTime,}) : super(key: key);
 
   @override
   _ListTiketState createState() => _ListTiketState();
