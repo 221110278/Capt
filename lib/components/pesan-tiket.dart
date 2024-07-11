@@ -128,7 +128,10 @@ class _TiketState extends State<Tiket> {
                       child: IconButton(
                         onPressed: () {
                           setState(() {
-                            if (jumlahTiket > 0) jumlahTiket--;
+                            if (jumlahTiket > 0) {
+                              jumlahTiket--;
+                              selectedFilm['jumlahTiket'] = jumlahTiket; 
+                            }
                           });
                         },
                         icon: Icon(Icons.remove),
@@ -147,14 +150,15 @@ class _TiketState extends State<Tiket> {
                         onPressed: () {
                           setState(() {
                             jumlahTiket++;
-                            selectedFilm['jumlahTiket'] = jumlahTiket;
+                            selectedFilm['jumlahTiket'] = jumlahTiket; 
                           });
                         },
                         icon: Icon(Icons.add),
                       ),
                     ),
                   ],
-                ),
+                  ),
+
 
                 SizedBox(height: 20),
                 ElevatedButton(
