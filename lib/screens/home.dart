@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tugas/components/allFilm.dart';
 import 'package:tugas/components/bookedTiket.dart';
@@ -17,6 +19,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<File> _images = [];
+
+  final picker = ImagePicker();
+
+  Future<void> _getImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _images.add(File(pickedFile.path));
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -108,7 +127,7 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        drawer: Drawer(
+          drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -116,25 +135,55 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.person,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      widget.username,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                child: GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SafeArea(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: Icon(Icons.photo_library),
+                                title: Text('Choose from gallery'),
+                                onTap: () {
+                                  _getImageFromGallery();
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _images.isEmpty
+                          ? Icon(
+                              Icons.person,
+                              size: 50,
+                              color: Colors.white,
+                            )
+                          : CircleAvatar(
+                              radius: 50,
+                              backgroundImage: FileImage(_images.last),
+                            ),
+                      SizedBox(height: 10),
+                      Text(
+                        widget.username,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+
               ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Home'),
